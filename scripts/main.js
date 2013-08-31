@@ -43,5 +43,19 @@ function dbReady() {
 }
 
 function gotLog(tx, results) {
+    if(results.rows.length == 0){
+        $("#result").html("No data.");
+        return false;
+    }
 
+    var s = "";
+
+    for(var i=0; i < results.rows.length; i++)
+    {
+        var d = new Date();
+        d.setTime(results.rows.item(i).created);
+        s += d.toDateString() + " " + d.toTimeString() + "<br/>";
+    }
+
+    $("#result").html(s);
 }
